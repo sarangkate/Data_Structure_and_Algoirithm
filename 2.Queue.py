@@ -1,66 +1,66 @@
-class Queue:
+class TicketCounter:
     def __init__(self):
         self.front = -1
         self.rear = -1
         self.QT = [0] * 5
 
-    def Insert(self, x):
+    def AddCustomer(self, name):
         if self.rear == 4:
             print("Queue is full")
         else:
             self.rear += 1
-            self.QT[self.rear] = x
+            self.QT[self.rear] = name
 
             if self.front == -1:
                 self.front = 0
 
-            print("Value inserted")
+            print("Customer added to queue")
 
-    def Delete(self):
+    def ServeCustomer(self):
         if self.front == -1:
             print("Queue is empty")
         else:
-            x = self.QT[self.front]
+            name = self.QT[self.front]
 
             if self.front == self.rear:
                 self.front = self.rear = -1
             else:
                 self.front += 1
 
-            return x
+            return name
 
     def Display(self):
         if self.front == -1:
             print("Queue is empty")
         else:
-            print("Queue elements:")
+            print("Customers waiting in queue:")
             for i in range(self.front, self.rear + 1):
                 print(self.QT[i])
 
 
-s1 = Queue()
+counter = TicketCounter()
 
 while True:
-    print("\n===== Queue =====")
-    print("1. Insert value in queue")
-    print("2. Delete front value")
-    print("3. Display queue")
+    print("\n===== Ticket Booking Counter =====")
+    print("1. Add customer to queue")
+    print("2. Serve customer")
+    print("3. Display waiting customers")
     print("4. Exit")
 
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
-        x = int(input("Enter value: "))
-        s1.Insert(x)
+        name = input("Enter customer name: ")
+        counter.AddCustomer(name)
 
     elif choice == 2:
-        x = s1.Delete()
+        name = counter.ServeCustomer()
 
-        if x is not None:
-            print("Deleted value:", x)
+        if name is not None:
+            print("Ticket booked for:", name)
 
     elif choice == 3:
-        s1.Display()
+        counter.Display()
 
     elif choice == 4:
         print("Program ended.")
