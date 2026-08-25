@@ -36,48 +36,23 @@ class Stack:
             return x
 
 def preorder(root):
-    s = Stack()
-    while root is not None:
-        print(root.data)
-        s.push(root)
-        root = root.left
-    while s.top != -1:
-        root = s.pop()
-        root = root.right
-        while root is not None:
-            print(root.data)
-            s.push(root)
-            root = root.left
-
+    if root is not None:
+        print(root.data,end=" ")
+        preorder(root.left)
+        preorder(root.right)
+        
 def Inorder(root):
-    s = Stack()
-    while root is not None:
-        s.push(root)
-        root = root.left
-    while s.top != -1:
-        root = s.pop()
-        print(root.data)
-        root = root.right
-        while root is not None:
-            s.push(root)
-            root = root.left
+    if root is not None:
+        preorder(root.left)
+        print(root.data,end=" ")
+        preorder(root.right)
     
 def Postorder(root):
-    s1 = Stack()
-    s2 = Stack()
-    
-    s1.push(root)
-    while s1.top != -1:
-        current  = s1.pop()
-        s2.push(current)
-        if current.left is not None:
-            s1.push(current.left)
-        if current.right is not None:
-            s1.push(current.right)
-    while s2.top != -1:
-        node = s2.pop()
-        print(node.data)
-
+    if root is not None:
+        preorder(root.left)
+        preorder(root.right)
+        print(root.data,end=" ")
+ 
 root = create()
 
 print("Postorder")
