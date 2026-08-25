@@ -1,53 +1,53 @@
-class Stack:
+class Library:
     def __init__(self):
         self.top = -1
-        self.ST = [0] * 5
+        self.books = [None] * 5
 
-    def Insert(self, x):
+    def ReturnBook(self, book):
         if self.top == 4:
-            print("Stack is full")
+            print("Return stack is full")
         else:
             self.top += 1
-            self.ST[self.top] = x
-            print("Value inserted")
+            self.books[self.top] = book
+            print("Book returned successfully")
 
-    def Delete(self):
+    def ProcessReturn(self):
         if self.top == -1:
-            print("Stack is empty")
+            print("No books to process")
         else:
-            x = self.ST[self.top]
+            book = self.books[self.top]
             self.top -= 1
-            print("Deleted value:", x)
+            print("Book processed:", book)
 
     def Display(self):
         if self.top == -1:
-            print("Stack is empty")
+            print("No returned books")
         else:
-            print("Stack elements:")
+            print("Returned books:")
             for i in range(self.top, -1, -1):
-                print(self.ST[i])
+                print(self.books[i])
 
 
-s1 = Stack()
+library = Library()
 
 while True:
-    print("\n===== Call Stack =====")
-    print("1. Insert value in stack")
-    print("2. Delete Top value")
-    print("3. Display stack")
+    print("\n===== Library Book Return Management =====")
+    print("1. Return a book")
+    print("2. Process latest returned book")
+    print("3. Display returned books")
     print("4. Exit")
 
     choice = int(input("Enter your choice: "))
 
     if choice == 1:
-        x = int(input("Enter value: "))
-        s1.Insert(x)
+        book = input("Enter book name: ")
+        library.ReturnBook(book)
 
     elif choice == 2:
-        s1.Delete()
+        library.ProcessReturn()
 
     elif choice == 3:
-        s1.Display()
+        library.Display()
 
     elif choice == 4:
         print("Program ended.")
