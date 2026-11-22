@@ -1,37 +1,37 @@
 from collections import deque
 
-V, E = map(int, input().split())
-graph = [[] for _ in range(V)]
+class Graph:
+    def __init__(self, v):
+        self.adj = [[] for _ in range(v)]
 
-for _ in range(E):
-    u, v = map(int, input().split())
-    graph[u].append(v)
-    graph[v].append(u)
+    def add_edge(self, u, v):
+        self.adj[u].append(v)
+        self.adj[v].append(u)
 
-for neighbours in graph:
-    neighbours.sort()
+    def bfs(self, start):
+        visited = [False] * len(self.adj)
+        q = deque([start])
+        visited[start] = True
 
-start = int(input())
+        while q:
+            node = q.popleft()
+            print(node, end=" ")
 
-print("Adjacency List:")
-for vertex in range(V):
-    print(vertex, ":", *graph[vertex])
+            for n in sorted(self.adj[node]):
+                if not visited[n]:
+                    visited[n] = True
+                    q.append(n)
 
-def bfs(graph, start):
-    visited = [False] * len(graph)
-    queue = deque([start])
-    visited[start] = True
-    order = []
 
-    while queue:
-        u = queue.popleft()
-        order.append(u)
-        for v in graph[u]:
-            if not visited[v]:
-                visited[v] = True
-                queue.append(v)
+v = int(input("Enter number of vertices: "))
+g = Graph(v)
 
-    return order
+e = int(input("Enter number of edges: "))
+for i in range(e):
+    u, v = map(int, input("Enter edge (u v): ").split())
+    g.add_edge(u, v)
 
+start = int(input("Enter starting vertex: "))
 print("BFS Traversal:")
-print(*bfs(graph, start))
+g.bfs(start)
+
